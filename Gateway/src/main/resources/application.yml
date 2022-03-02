@@ -1,0 +1,61 @@
+server:
+  port: 8443
+  ssl:  
+     enabled: true
+     key-store: classpath:clave.jks
+     key-store-password: ''
+     key-alias: tomcat
+   
+   
+   
+   
+spring:
+  application:
+    name: servidor-gateway
+  cloud: 
+   gateway:
+      routes:
+      - id: serv-usuarios
+          #lb:// cuando se va a acceder a través de Eureka
+        uri: lb://usuarios #http://localhost:8080
+        predicates:
+          - Path=/usuarios/**
+        filters:
+          - RewritePath=/usuarios/*, /
+          
+      - id: serv-aportaciones
+          #lb:// cuando se va a acceder a través de Eureka
+        uri: lb://aportaciones #http://localhost:8080
+        predicates:
+          - Path=/aportaciones/**
+        filters:
+          - RewritePath=/aportaciones/*, /
+          
+      - id: serv-authentication
+          #lb:// cuando se va a acceder a través de Eureka
+        uri: lb://authentication #http://localhost:8080
+        predicates:
+          - Path=/authentication/**
+        filters:
+          - RewritePath=/authentication/*, /
+          
+      - id: serv-enviaremail
+          #lb:// cuando se va a acceder a través de Eureka
+        uri: lb://EnviarEmail #http://localhost:8080
+        predicates:
+          - Path=/EnviarEmail/**
+        filters:
+          - RewritePath=/EnviarEmail/*, /
+      #httpclient:
+       #ssl:
+        #useInsecureTrustManager: true
+
+               
+        
+eureka:                  
+ client:
+  serviceUrl:
+   defaultZone: http://admin:''@'':8761/eureka
+   #defaultZone: http://localhost:8761/eureka
+  
+       

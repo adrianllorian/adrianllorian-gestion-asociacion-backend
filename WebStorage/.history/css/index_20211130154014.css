@@ -1,0 +1,17 @@
+#pantallaAportacion:focus { 
+    outline: none !important;
+    border-color: rgb(136,194,255);
+    box-shadow: 0 0 10px #719ECE;
+}
+
+#pantallaAportacion{
+    border:solid 1px rgb(221,226,231); 
+    text-align:rigth;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
